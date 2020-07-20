@@ -1,9 +1,13 @@
-node{
-  stage('SCM Checkout'){
-    git 'https://github.com/kaitus/gradle.git'
-  }
-  
-  stage('Compile-Package') {
-    sh './gradlew -v'
+pipeline {
+ agent any
+  stages {
+    stages("run backend") {
+      steps {
+        echo 'execute gradle...'
+        withGradle(){
+          sh './gradlew -v'
+        }
+      }
+    }
   }
 }
